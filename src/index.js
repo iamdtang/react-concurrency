@@ -13,17 +13,13 @@ export function task(generator) {
       if (isPromise(yielded.value)) {
         yielded.value.then((data) => {
           recursivelyCallNextOnIterator(data);
-          // if (component._isMounted) {
-          //   recursivelyCallNextOnIterator(data);
-          // } else {
-          //   console.log('iterator.next() not called');
-          // }
+          if (component._isMounted) {
+            recursivelyCallNextOnIterator(data);
+          }
         }, (e) => {
-          // if (component._isMounted) {
+          if (component._isMounted) {
             iterator.throw(e);
-          // } else {
-            // console.log('iterator.throw() not called');
-          // }
+          }
         });
       }
     }
