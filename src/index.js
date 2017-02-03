@@ -1,14 +1,31 @@
 import React from 'react';
 
 export function task(generator) {
-  return function() {
+  let taskInstance = {
+    isIdle: true,
+    isRunning: false
+  };
+  taskInstance.perform = function() {
+    taskInstance.isIdle = false;
+    taskInstance.isRunning = true;
     let component = this;
     let iterator = generator.call(component);
     recursivelyCallNextOnIterator();
 
     // this function keeps calling next() if a promise is yielded
     function recursivelyCallNextOnIterator(data) {
-      let yielded = iterator.next.apply(iterator, arguments); // { value: Any, done: Boolean }
+      let yielded = iterator.next.apply(iterator, arguments);
+      // yielded = { value: Any, done: Boolean }
+
+      if (yielded.done) {
+        taskInstance.isIdle = true;
+        taskInstance.isRunning = false;
+        // call setState with the same state to trigger another render
+        // so that you can use task properties like isIdle directly
+        // in render function
+        component.setState(component.state);
+        return;
+      }
 
       if (isPromise(yielded.value)) {
         yielded.value.then((data) => {
@@ -22,7 +39,8 @@ export function task(generator) {
         });
       }
     }
-  }
+  };
+  return taskInstance;
 }
 
 export function timeout(milliseconds) {

@@ -1,7 +1,12 @@
 React Concurrency
 =================
 
-Easily prevent `setState` warnings in your React components, similar to [ember-concurrency](http://ember-concurrency.com/).
+An implementation of [ember-concurrency](http://ember-concurrency.com/) for React components. This is still a work in progress.
+
+## Currently Implemented Features
+
+* Tasks get automatically canceled when the component they live on is destroyed
+* Derived state with `isRunning` and `isIdle` flags
 
 ## Installation
 
@@ -15,13 +20,17 @@ Have you ever seen the error?
 
 > Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the YourComponent component.
 
-This can happen when a callback from an asynchronous operation gets executed but the component has been unmounted. There are a few ways to deal with this in React. Read about them [here](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html).
+There are a few ways to deal with this in React. Read about them [here](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html).
 
-In Ember, there is an addon called [ember-concurrency](http://ember-concurrency.com/) to help with this problem. This library attempts to do the same but for React components while keeping a similar API. __This is still a WIP.__
+In Ember, there is an addon called [ember-concurrency](http://ember-concurrency.com/) to help with this problem. This library attempts to do the same but for React components while keeping a similar API.
 
-## Example
+`react-concurrency` also provides derived state. Have you ever written flags on your state like `isRunning`? `react-concurrency` gives you the concepts of tasks which expose derived state like `isRunning` and `isIdle`.
 
-Imagine you have an `AsyncButton` component that takes an asynchronous function that returns a promise. As the promise transitions through its different states, the button's label changes.
+## Example 1
+
+This example shows how tasks get automatically canceled when the component they live on is destroyed.
+
+Imagine you have an `AsyncButton` component that takes an asynchronous function that returns a promise, in this case `save`. As the promise transitions through its different states, the button's label changes.
 
 ```jsx
 <AsyncButton
@@ -32,9 +41,9 @@ Imagine you have an `AsyncButton` component that takes an asynchronous function 
   onClick={this.save.bind(this)} />
 ```
 
-To use this library, first create a component that extends from `ConcurrentComponent`. Next, define a method using the `task` function, which takes in a generator function. See the `handleClick` method below, which gets invoked when the button is clicked.
+To use this library, first create a component that extends from `ConcurrentComponent`. Next, define a property using the `task` function, which takes in a generator function. See `handleClick` below. `handleClick` is a task object with a `perform` method, which gets invoked when the button is clicked.
 
-The `yield` keyword is used with promises. When you yield a promise, your task function will pause execution. If the promise resolves, the task will continue executing from that point. If the promise rejects, the task will throw an error at that point. If the component has been destroyed, the task will stop executing.
+The `yield` keyword is used with promises. When you yield a promise, your task function will pause execution. If the promise resolves, the task will continue executing from that point. If the promise rejects, the task will throw an error at that point. If the component has been unmounted, the task will get cancelled.
 
 ```js
 import React from 'react';
@@ -62,8 +71,53 @@ class AsyncButton extends ConcurrentComponent {
 
   render() {
     return (
-      <button onClick={this.handleClick.bind(this)}>
+      <button onClick={this.handleClick.perform.bind(this)}>
         {this.state.label}
+      </button>
+    );
+  }
+}
+
+export default AsyncButton;
+```
+
+## Example 2
+
+This example shows how to use derived state flats on tasks.
+
+This example is similar to the previous one, but inside the button the derived state flags `isIdle` and `isRunning` are used.
+
+```jsx
+import React from 'react';
+import { ConcurrentComponent, task, timeout } from 'react-concurrency';
+
+class AsyncButton extends ConcurrentComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      label: this.props.default
+    };
+  }
+
+  handleClick = task(function*() {
+    try {
+      this.setState({ label: this.props.pending });
+      yield this.props.onClick();
+      this.setState({ label: this.props.success });
+      yield timeout(2000);
+      this.setState({ label: this.props.default });
+    } catch (e) {
+      this.setState({ label: this.props.error });
+    }
+  })
+
+  render() {
+    let isIdle = this.handleClick.isIdle ? 'idle' : 'running';
+    let isRunning = this.handleClick.isRunning ? 'running' : 'idle';
+
+    return (
+      <button onClick={this.handleClick.perform.bind(this)}>
+        {this.state.label} - {isIdle} - {isRunning}
       </button>
     );
   }
