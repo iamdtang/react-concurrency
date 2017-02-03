@@ -1,6 +1,16 @@
 React Concurrency
 =================
 
+Easily prevent `setState` warnings in your React components, similar to [ember-concurrency](http://ember-concurrency.com/).
+
+## Installation
+
+```
+npm install react-concurrency
+```
+
+## Why?
+
 Have you ever seen the error?
 
 > Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the YourComponent component.
@@ -11,7 +21,7 @@ In Ember, there is an addon called [ember-concurrency](http://ember-concurrency.
 
 ## Example
 
-Imagine you have an `AsyncButton` component:
+Imagine you have an `AsyncButton` component that takes an asynchronous function that returns a promise. As the promise transitions through its different states, the button's label changes.
 
 ```jsx
 <AsyncButton
@@ -19,10 +29,10 @@ Imagine you have an `AsyncButton` component:
   pending="Saving ..."
   success="Saved"
   error="Try Again"
-  onClick={this.save} />
+  onClick={this.save.bind(this)} />
 ```
 
-The `onClick` prop is a function that does something asynchronous. The button's text shows something different based on the state of the promise. To use this library, first create a component that extends from `ConcurrentComponent`. Next, define a method using the `task` function, which takes in a generator function. See the `handleClick` method, which gets invoked when the button is clicked.
+To use this library, first create a component that extends from `ConcurrentComponent`. Next, define a method using the `task` function, which takes in a generator function. See the `handleClick` method below, which gets invoked when the button is clicked.
 
 The `yield` keyword is used with promises. When you yield a promise, your task function will pause execution. If the promise resolves, the task will continue executing from that point. If the promise rejects, the task will throw an error at that point. If the component has been destroyed, the task will stop executing.
 
