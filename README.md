@@ -5,11 +5,9 @@ Have you ever seen the error?
 
 > Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op. Please check the code for the YourComponent component.
 
-This can happen when a callback from an asynchronous operation gets executed but the component has been destroyed. For example, a user might do something that triggers and AJAX call and then transitions to another route.
+This can happen when a callback from an asynchronous operation gets executed but the component has been unmounted. There are a few ways to deal with this in React. Read about them [here](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html).
 
-There are a few ways to deal with this. Read about them [here](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html).
-
-In Ember, there is an addon called [ember-concurrency](http://ember-concurrency.com/) to help with this problem. This package attempts to do the same but for React components while keeping a similar API. This is still a WIP.
+In Ember, there is an addon called [ember-concurrency](http://ember-concurrency.com/) to help with this problem. This library attempts to do the same but for React components while keeping a similar API. __This is still a WIP.__
 
 ## Example
 
