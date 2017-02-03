@@ -12,7 +12,6 @@ export function task(generator) {
 
       if (isPromise(yielded.value)) {
         yielded.value.then((data) => {
-          recursivelyCallNextOnIterator(data);
           if (component._isMounted) {
             recursivelyCallNextOnIterator(data);
           }
