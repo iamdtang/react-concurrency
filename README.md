@@ -28,7 +28,7 @@ In Ember, there is an addon called [ember-concurrency](http://ember-concurrency.
 
 ## Example 1
 
-This example shows how tasks get automatically canceled when the component they live on is destroyed.
+This example shows how tasks get automatically canceled when the component they live on is destroyed. See a live example here: [http://react-concurrency.surge.sh/](http://react-concurrency.surge.sh/)
 
 Imagine you have an `AsyncButton` component that takes an asynchronous function that returns a promise, in this case `save`. As the promise transitions through its different states, the button's label changes.
 
@@ -83,7 +83,7 @@ export default AsyncButton;
 
 ## Example 2
 
-This example shows how to use derived state flats on tasks.
+This example shows how to use derived state flags on tasks. See a live example here: [http://react-concurrency.surge.sh/](http://react-concurrency.surge.sh/)
 
 This example is similar to the previous one, but inside the button the derived state flags `isIdle` and `isRunning` are used.
 
