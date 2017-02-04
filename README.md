@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/skaterdav85/react-concurrency.svg?branch=master)](https://travis-ci.org/skaterdav85/react-concurrency)
+
 React Concurrency
 =================
 
