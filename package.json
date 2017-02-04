@@ -1,6 +1,6 @@
 {
   "name": "react-concurrency",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "ember-concurrency for React components",
   "repository": {
       "type": "git",
@@ -24,7 +24,9 @@
       "functions",
       "iterable",
       "yield",
-      "task"
+      "task",
+      "isIdle",
+      "isRunning"
   ],
   "options": {
       "mocha": "--require scripts/mocha_runner src/**/__tests__/**/*.js"
