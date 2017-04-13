@@ -25,7 +25,7 @@ Have you ever seen the error?
 
 There are a few ways to deal with this in React. Read about them [here](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html).
 
-In Ember, this is solved with a brilliant addon called [ember-concurrency](http://ember-concurrency.com/). This library attempts to do the same but for React components while keeping a similar API. If you haven't read about ember-concurrency, check out this great article: [ember-concurrency: the solution to so many problems you never knew you had](https://emberway.io/ember-concurrency-the-solution-to-so-many-problems-you-never-knew-you-had-cce6d7731ba9#.e6r0iv44u)
+In Ember, this is solved with a brilliant addon called [ember-concurrency](http://ember-concurrency.com/). This library attempts to do the same but for React components while keeping a similar API. If you haven't read about ember-concurrency, check out this great article: [ember-concurrency: the solution to so many problems you never knew you had](https://emberway.io/ember-concurrency-the-solution-to-so-many-problems-you-never-knew-you-had-cce6d7731ba9#.e6r0iv44u).
 
 
 * [Example 1](examples/example-1.md)
