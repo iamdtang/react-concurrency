@@ -1,3 +1,6 @@
+Example 2 - Derived State Flags
+===
+
 This example shows how to use derived state flags on tasks. See a live example here: [http://react-concurrency.surge.sh/](http://react-concurrency.surge.sh/)
 
 This example is similar to the previous one, but inside the button the derived state flags `isIdle` and `isRunning` are used.

@@ -28,8 +28,8 @@ There are a few ways to deal with this in React. Read about them [here](https://
 In Ember, this is solved with a brilliant addon called [ember-concurrency](http://ember-concurrency.com/). This library attempts to do the same but for React components while keeping a similar API. If you haven't read about ember-concurrency, check out this great article: [ember-concurrency: the solution to so many problems you never knew you had](https://emberway.io/ember-concurrency-the-solution-to-so-many-problems-you-never-knew-you-had-cce6d7731ba9#.e6r0iv44u)
 
 
-[Example 1](examples/example-1.md)
-[Example 2](examples/example-2.md)
+* [Example 1](examples/example-1.md)
+* [Example 2](examples/example-2.md)
 
 ## About This Repo
 

@@ -1,3 +1,6 @@
+Example 1 - Task Cancellation
+=========
+
 This example shows how tasks get automatically canceled when the component they live on is destroyed. See a live example here: [http://react-concurrency.surge.sh/](http://react-concurrency.surge.sh/)
 
 Imagine you have an `AsyncButton` component that takes an asynchronous function that returns a promise, in this case `save`. As the promise transitions through its different states, the button's label changes.
