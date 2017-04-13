@@ -13,20 +13,12 @@
   },
   "homepage": "https://github.com/skaterdav85/react-concurrency#readme",
   "keywords": [
-      "react-component",
       "react",
       "ember",
       "concurrency",
       "ember-concurrency",
-      "react",
       "generators",
-      "generator",
-      "functions",
-      "iterable",
-      "yield",
-      "task",
-      "isIdle",
-      "isRunning"
+      "task"
   ],
   "options": {
       "mocha": "--require scripts/mocha_runner src/**/__tests__/**/*.js"

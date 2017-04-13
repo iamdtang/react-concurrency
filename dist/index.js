@@ -98,7 +98,7 @@
           taskInstance.isRunning = false;
           // call setState with the same state to trigger another render
           // so that you can use task properties like isIdle directly
-          // in render function
+          // in your render function
           component.setState(component.state);
           return;
         }
