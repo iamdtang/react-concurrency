@@ -31,6 +31,8 @@ In Ember, this is solved with a brilliant addon called [ember-concurrency](http:
 * [Example 1](examples/example-1.md)
 * [Example 2](examples/example-2.md)
 
+Run the examples here: [https://github.com/skaterdav85/react-concurrency-demos](https://github.com/skaterdav85/react-concurrency-demos).
+
 ## About This Repo
 
 This repo was created with [react-npm-boilerplate](https://github.com/juliancwirko/react-npm-boilerplate).
