@@ -1,6 +1,6 @@
 {
   "name": "react-concurrency",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "ember-concurrency for React components",
   "repository": {
     "type": "git",
